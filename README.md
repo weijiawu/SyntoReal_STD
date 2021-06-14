@@ -12,7 +12,7 @@ Adaptation for Scene Text Detection in the Wild
 
 &#160;&#160;&#160;&#160; &#160;&#160;we propose a synthetic-to-real domain adaptation method for scene text detection, which transfers knowledge from synthetic data (source domain) to real data (target domain)
 
-&#160;&#160;&#160;&#160; &#160;&#160;From more details,please refer to our arXiv paper.(TDB)
+&#160;&#160;&#160;&#160; &#160;&#160;From more details,please refer to our [paper](https://openaccess.thecvf.com/content/ACCV2020/papers/Wu_Synthetic-to-Real_Unsupervised_Domain_Adaptation_for_Scene_Text_Detection_in_the_ACCV_2020_paper.pdf) 
 
 ## Environments
 
