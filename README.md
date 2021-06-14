@@ -1,6 +1,10 @@
 # Synthetic-to-Real-Unsupervised-Domain-Adaptation-for-Scene-Text-Detection-in-the-Wild
 
-![Alt text](https://github.com/weijiawu/Synthetic-to-Real-Unsupervised-Domain-Adaptation-for-Scene-Text-Detection-in-the-Wild/tree/master/image/1598619033(1).png)
+<div align="center">
+  <img src="image/1598619033(1).png" width="700"/>
+</div>
+
+
 
 ### Introduction
 &#160;&#160;&#160;&#160; &#160;&#160;This is a project concerning Synthetic-to-Real Unsupervised Domain
@@ -20,10 +24,22 @@ Adaptation for Scene Text Detection in the Wild
 
 
 ## Train
+The pre-trained model can be obtained from [Baidu Drive](https://pan.baidu.com/s/1f385DFGUVFIWnPBmAA2Ljw) password: n74a
+
+Before taining the model, you need to configure related parameters:
+```
+resume
+target_pseudo_negative
+target_pseudo_positive
+target_image
+path_save
+
+```
+
 Our experiments are based on one machine with 2 2080ti(16g memory).
 
 ```
-(TDB)
+python trainSyndataToICDAR15.py
 ```
 
 ## Eval

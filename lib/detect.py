@@ -182,44 +182,6 @@ def detect_dataset(model, device, test_img_path, submit_path):
 			f.writelines(seq)
 
 
-if __name__ == '__main__':
-	img_path    = '/data/data_weijiawu/Sence_Text_detection/Paper-ACCV/DomainAdaptive/ICDAR2015/EAST_v1/ICDAR15/Test/image/'
-	model_path  = '/data/data_weijiawu/Sence_Text_detection/Paper-ACCV/DomainAdaptive/ICDAR2015/EAST_v4/Model_save/model_epoch_1.pth'
-	res_img     = '/data/data_weijiawu/Sence_Text_detection/Paper-ACCV/DomainAdaptive/ICDAR2015/EAST_v1/ICDAR15/Test/submit/'
-	device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-	model = EAST().to(device)
-	model.load_state_dict(torch.load(model_path))
-	model.eval()
-
-	image_list = os.listdir(img_path)
-	for one_image in tqdm(image_list):
-		image_path = os.path.join(img_path,one_image)
-		img = Image.open(image_path)
-		output_path = os.path.join(
-			"/home/wwj/workspace/Sence_Text_detection/Paper-ACCV/DomainAdaptive/ICDAR2013/EAST_v1/show/", one_image)
-		img_show = cv2.imread(image_path)
-		filename, file_ext = os.path.splitext(os.path.basename(one_image))
-		res_file = res_img + "res_" + filename + '.txt'
-
-		boxes,score = detect(img, model, device)
-
-		with open(res_file, 'w') as f:
-			if boxes is None:
-				continue
-			for i, box in enumerate(boxes):
-				poly = np.array(box).astype(np.int32)
-				points = np.reshape(poly, -1)
-				strResult = ','.join(
-					[str(points[0]), str(points[1]), str(points[2]), str(points[3]), str(points[4]), str(points[5]),
-					 str(points[6]), str(points[7])]) + '\r\n'
-
-				cv2.drawContours(img_show, [poly[:8].reshape(4, 2)], -1, (0, 0, 255), 2)
-				f.write(strResult)
-		cv2.imwrite(output_path, img_show)
-	f_score  = getresult(res_img)
-	print("f_score:",f_score)
-		# plot_img = plot_boxes(img, boxes)
-		# plot_img.save(res_img)
 
 
 

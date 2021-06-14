@@ -27,11 +27,11 @@ def get_negative_sample(score_map,negative_thresh=0.5):
     kernel = np.ones((4, 4), np.uint8)
     postive_score = cv2.dilate(postive_score, kernel, iterations=1)
 
-    xy_negative = np.argwhere(score_map*(1-postive_score))  #得到negative的索引
+    xy_negative = np.argwhere(score_map*(1-postive_score)) 
     xy_negative = xy_negative[np.argsort(xy_negative[:, 0])]
     valid_score = score_map[xy_negative[:, 0], xy_negative[:, 1]]  # 5 x n
-    xy_negative = xy_negative[np.argsort(valid_score)]    #返回从小到大的索引
-    # negative_number = xy_negative.shape[0]                #有多少个negative sample
+    xy_negative = xy_negative[np.argsort(valid_score)]    
+    # negative_number = xy_negative.shape[0]                
     xy_negative = xy_negative[:int(xy_negative.shape[0] / 3), :].T #取前1/3的值作为负样本进行监督
     negative_map[xy_negative[0], xy_negative[1]] = 1
 
@@ -222,19 +222,8 @@ def generate_pseduo(model, input_path,output_path,negative_path,device):
                 # cv2.fillPoly(negative_map, np.array(
                 #     [[[points[0], points[1]], [points[2], points[3]], [points[4], points[5]], [points[6], points[7]]]]),(0))
 
-        # 腐蚀
-        # kernel = np.ones((3, 3), np.uint8)
-        # negative_map = cv2.erode(negative_map, kernel, iterations=1)
         cv2.imwrite(negative_file, negative_map)
 
-        # negative_file_1 = negative_path + filename + 'map.png'
-        # pred_score_smoothing = pred_score_smoothing[0]
-        # cv2.imwrite(negative_file_1, pred_score_smoothing*255)
-
-        # negative_file = "/home/wwj/workspace/Sence_Text_detection/Paper-ACCV/DomainAdaptive/ICDAR2015/EAST_v2/evaluate/show/" + filename + '.png'
-        # plot_img = plot_boxes(img, after_NMS_box)
-        # plot_img.save(negative_file)
-        # raise  NameError
 
 def get_iou(a,b):
 	'''
